@@ -1,7 +1,9 @@
 (defcc <pair>
-  <string> <colon> <value>;)
+  <string> <colon> <value>
+  := [pair [<string> <colon> <value>]];)
 
-(defcc <colon> ;)  
+(defcc <colon>
+  ":" := [colon ":"])
 
 (defcc <value>
   <string>;
@@ -12,13 +14,19 @@
   <false>;
   <null>;)
 
-(defcc <string>
-  <left-double-quote> <right-double-quote>;
-  <left-double-quote> <chars> <right-double-quote>;)
+(defcc <double-quote>
+  "c#34;" := skip;)
 
-(defcc <chars>
-  <char>;
-  <char> <chars>;)
+(defcc <string>
+  <double-quote> <string-chars> <double-quote>
+  := [string <string-chars>];)
+
+(defcc <string-char>
+  Char := Char where (not (= Char "c#34;"));)
+
+(defcc <string-chars>
+  <string-char> <string-chars> := (cn <string-char> <string-chars>);
+  <e> := "";)
 
 (defcc <number> ;)
 
@@ -31,19 +39,30 @@
   <pair> <comma> <members>;)
 
 (defcc <array>
- <left-angled-bracket> <right-angled-bracket>;
- <left-angled-bracket> <elements> <right-angled-bracket>;)
+ <left-square-bracket> <right-square-bracket>;
+ <left-square-bracket> <elements> <right-square-bracket>;)
 
 (defcc <elements>
   <value>;
   <value> <comma> <elements>;)
 
+(defcc <left-square-bracket>
+  "[" := skip;)
+
+(defcc <right-square-bracket>
+  "]" := skip;)
+
+(defcc <comma>
+  "," := skip;)
+
 (defcc <true>
-  "true";)
+  "true" := skip;)
 
 (defcc <false>
-  "false";)
-(defcc <null> ;)
+  "false" := skip;)
+
+(defcc <null>
+  "null" := skip;)
 
 
   
