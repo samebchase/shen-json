@@ -50,7 +50,7 @@
   <number>;
   <object>;
   <array>;
-  <true>;
+  <true> := [value <true>];
   <false>;
   <null>;)
 
