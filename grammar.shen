@@ -28,6 +28,9 @@
 (defcc <any-char>
   Char := Char;)
 
+(defcc <string-char>
+  Char := Char where (not (= Char "c#34;"));)
+
 (defcc <string-chars>
   "\" <any-char> <string-chars> := (cn <any-char> <string-chars>);
   <string-char> <string-chars> := (cn <string-char> <string-chars>);
