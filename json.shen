@@ -20,19 +20,16 @@
 (defcc <backslash>
   "\" := "\";)
 
-(defcc <escaped-double-quote>
-  <backslash> <double-quote> := (cn <backslash> <double-quote>))
-
-(defcc <string>
-  <double-quote> <string-chars> <double-quote>
-  := [string <string-chars>];)
-
-(defcc <string-char>
-  Char := Char where (not (= Char "c#34;"));)
+(defcc <any-char>
+  Char := Char;)
 
 (defcc <string-chars>
+  "\" <any-char> <string-chars> := (cn <any-char> <string-chars>);
   <string-char> <string-chars> := (cn <string-char> <string-chars>);
   <e> := "";)
+
+(defcc <string>
+  <double-quote> <string-chars> <double-quote> := [string <string-chars>];)
 
 (defcc <number> ;)
 
