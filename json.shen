@@ -15,7 +15,13 @@
   <null>;)
 
 (defcc <double-quote>
-  "c#34;" := skip;)
+  "c#34;" := "c#34;";)
+
+(defcc <backslash>
+  "\" := "\";)
+
+(defcc <escaped-double-quote>
+  <backslash> <double-quote> := (cn <backslash> <double-quote>))
 
 (defcc <string>
   <double-quote> <string-chars> <double-quote>
@@ -64,7 +70,7 @@
 (defcc <null>
   "null" := skip;)
 
-
-  
-  
-  
+\*
+test: <pair>
+(compile <pair> (explode "c#34;onec#34;:c#34;twoc#34;"))
+*\
