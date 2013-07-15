@@ -1,18 +1,23 @@
-(defcc <pair>
-  <string> <colon> <value>
-  := [pair [<string> <colon> <value>]];)
+(defcc <left-square-bracket>
+  "[" := [array-begin "["];)
+
+(defcc <right-square-bracket>
+  "]" := [array-end "]"];)
+
+(defcc <comma>
+  "," := [comma ","];)
+
+(defcc <true>
+  "true" := [bool "true"];)
+
+(defcc <false>
+  "false" := [bool "false"];)
+
+(defcc <null>
+  "null" := [null "null"];)
 
 (defcc <colon>
   ":" := [colon ":"])
-
-(defcc <value>
-  <string>;
-  <number>;
-  <object>;
-  <array>;
-  <true>;
-  <false>;
-  <null>;)
 
 (defcc <double-quote>
   "c#34;" := "c#34;";)
@@ -33,6 +38,19 @@
 
 (defcc <number> ;)
 
+(defcc <pair>
+  <string> <colon> <value>
+  := [pair [<string> <colon> <value>]];)
+
+(defcc <value>
+  <string>;
+  <number>;
+  <object>;
+  <array>;
+  <true>;
+  <false>;
+  <null>;)
+
 (defcc <object> 
  <left-curly-brace> <right-curly-brace>;
  <left-curly-brace> <members> <right-curly-brace>;)
@@ -48,21 +66,3 @@
 (defcc <elements>
   <value>;
   <value> <comma> <elements>;)
-
-(defcc <left-square-bracket>
-  "[" := skip;)
-
-(defcc <right-square-bracket>
-  "]" := skip;)
-
-(defcc <comma>
-  "," := skip;)
-
-(defcc <true>
-  "true" := skip;)
-
-(defcc <false>
-  "false" := skip;)
-
-(defcc <null>
-  "null" := skip;)
