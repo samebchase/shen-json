@@ -7,12 +7,33 @@
 (compile <comma> [","])
 (compile <colon> [":"])
 
+
+\* <string> *\
+\* #c34; is the character representation of '"' *\
+
+\* Empty string *\
+(compile <string> (explode "#c34;#c34;"))
 \* Basic string *\
 (compile <string> (explode "c#34;foo-bar-bazc#34;"))
 \* String with escaped quotes i.e. \" *\
 (compile <string> (explode "c#34;c#34;"))
 
-\* Tests: <value> *\
+\* </string> *\
+
+
+\* <array> *\
+\* </array> *\
+
+
+\* <object> *\
+\* </object> *\
+
+
+\* <number> *\
+\* </number> *\
+
+
+\* <value> *\
 
 \* <value> -> <string> *\
 (compile <value> (explode "c#34;foobarc#34;"))
@@ -26,7 +47,10 @@
 \* <value> -> <number> *\
 \* <value> -> <object> *\
 
-\* Tests: <pair> *\
+\* </value> *\
+
+
+\* <pair> *\
 
 \* <pair> -> <string> : <string> *\
 (compile <pair> (explode "c#34;onec#34;:c#34;twoc#34;"))
@@ -38,3 +62,5 @@
 (compile <pair> (explode "c#34;onec#34;:null"))
 \* <pair> -> <string> : <array> *\
 \* <pair> -> <string> : <object> *\
+
+\* </pair> *\
