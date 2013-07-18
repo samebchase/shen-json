@@ -22,6 +22,15 @@
 (defcc <double-quote>
   "c#34;" := "c#34;";)
 
+(defcc <minus>
+  "-" := skip;)
+
+(defcc <plus>
+  "+" := skip;)
+
+(defcc <decimal-point>
+  "." := skip;)
+
 (defcc <backslash>
   "\" := "\";)
 
@@ -39,7 +48,35 @@
 (defcc <string>
   <double-quote> <string-chars> <double-quote> := [string <string-chars>];)
 
-(defcc <number> ;)
+(defcc <number>
+  <int>;
+  <int> <fraction>;
+  <int> <exponent>;
+  <int> <fraction> <exponent>;)
+
+(defcc <fraction>
+  <decimal-point> <digits>;)
+
+(defcc <int>
+  <digit>;
+  <digit-1-to-9> <digits>;
+  <minus> <digit>;
+  <minus> <digit-1-to-9> <digits>;)
+
+(defcc <digits>
+  <digit>;
+  <digit> <digits>;)
+
+(defcc <exponent>
+  <exp> <digits>;)
+
+(defcc <exp>
+  "e"     := skip;
+  "e" "+" := skip;
+  "e" "-" := skip;
+  "E"     := skip;
+  "E" "+" := skip;
+  "E" "-" := skip;)
 
 (defcc <pair>
   <string> <colon> <value>
