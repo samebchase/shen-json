@@ -8,13 +8,13 @@
   "," := [comma ","];)
 
 (defcc <true>
-  "true" := [bool "true"];)
+  "t" "r" "u" "e" := [bool "true"];)
 
 (defcc <false>
-  "false" := [bool "false"];)
+  "f" "a" "l" "s" "e" := [bool "false"];)
 
 (defcc <null>
-  "null" := [null "null"];)
+  "n" "u" "l" "l" := [null "null"];)
 
 (defcc <colon>
   ":" := [colon ":"])
@@ -46,13 +46,13 @@
   := [pair [<string> <colon> <value>]];)
 
 (defcc <value>
+  <true>;
+  <false>;
+  <null>;
   <string>;
   <number>;
   <object>;
-  <array>;
-  <true> := [value <true>];
-  <false>;
-  <null>;)
+  <array>;)
 
 (defcc <object> 
  <left-curly-brace> <right-curly-brace>;
