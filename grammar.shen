@@ -1,3 +1,5 @@
+(load "util.shen")
+
 (defcc <left-square-bracket>
   "[" := [array-begin "["];)
 
@@ -48,6 +50,17 @@
 (defcc <string>
   <double-quote> <string-chars> <double-quote> := [string <string-chars>];)
 
+(defcc <digit-1-to-9>
+  Digit-1-to-9 := Digit-1-to-9 where (member Digit-1-to-9 (explode "123456789"));)
+
+(defcc <digit>
+  "0" := "0";
+  <digit-1-to-9> := <digit-1-to-9>;)
+
+(defcc <digits>
+  <digit> <digits> := (cn <digit> <digits>);
+  <e> := "";)
+
 (defcc <number>
   <int>;
   <int> <fraction>;
@@ -57,30 +70,11 @@
 (defcc <fraction>
   <decimal-point> <digits>;)
 
-(defcc <digit-1-to-9>
-  "1" := ["1"];
-  "2" := ["2"];
-  "3" := ["3"];
-  "4" := ["4"];
-  "5" := ["5"];
-  "6" := ["6"];
-  "7" := ["7"];
-  "8" := ["8"];
-  "9" := ["9"];)
-
-(defcc <digit>
-  "0" := ["0"];
-  <digit-1-to-9> := <digit-1-to-9>;)
-
 (defcc <int>
   <digit>;
   <digit-1-to-9> <digits> := (cn <digit-1-to-9> <digits>);
   <minus> <digit>;
   <minus> <digit-1-to-9> <digits>;)
-
-(defcc <digits>
-  <digit>;
-  <digit> <digits> := (cn <digit> <digits>);)
 
 (defcc <exponent>
   <exp> <digits>;)
