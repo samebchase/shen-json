@@ -41,6 +41,16 @@
 \* </digits> *\
 
 
+
+
 \* <fraction> *\
 (compile <fraction> (explode ".1234"))
 \* </fraction> *\
+
+
+\* <int> *\
+(compile <int> (explode "1"))
+(compile <int> (explode "-4"))
+(compile <int> (explode "1234"))
+(compile <int> (explode "-4567"))
+\* </int> *\

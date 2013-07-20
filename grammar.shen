@@ -43,8 +43,8 @@
   Char := Char where (not (= Char "c#34;"));)
 
 (defcc <string-chars>
-  "\" <any-char> <string-chars> := (cn <any-char> <string-chars>);
-  <string-char> <string-chars> := (cn <string-char> <string-chars>);
+  "\" <any-char> <string-chars> := (@s <any-char> <string-chars>);
+  <string-char> <string-chars> := (@s <string-char> <string-chars>);
   <e> := "";)
 
 (defcc <string>
@@ -58,17 +58,27 @@
   <digit-1-to-9> := <digit-1-to-9>;)
 
 (defcc <digits>
-  <digit> <digits> := (cn <digit> <digits>);
+  <digits> <digits> := (@s <digit> <digits>);
+  <e> := "";)
+
+(defcc <json-digits>
+  "0" := "0";
+  <digit-1-to-9> <digits> := (@s <digit-1-to-9> <digits>);
   <e> := "";)
 
 (defcc <fraction>
-  <decimal-point> <digits> := (cn <decimal-point> <digits>);)
+  <decimal-point> <digits> := (@s <decimal-point> <digits>);)
 
 (defcc <int>
-  <digit>;
-  <digit-1-to-9> <digits> := (cn <digit-1-to-9> <digits>);
-  <minus> <digit>;
-  <minus> <digit-1-to-9> <digits>;)
+  <digit> := <digit>;
+  <minus> <digit> := (@s <minus> <digit>);
+  <digit-1-to-9> <digits> := (@s <digit-1-to-9> <digits>);
+  <minus> <digit-1-to-9> <digits> := (@s <minus> <digit-1-to-9> <digits>);
+  <e> := "";)
+
+(defcc <int-test>
+  <minus> <digits> := (@s <minus> <digits>);
+  <digit-1-to-9> <digits> := (@s <digit-1-to-9> <digits>);)
 
 (defcc <number>
   <int>;
