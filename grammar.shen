@@ -57,15 +57,30 @@
 (defcc <fraction>
   <decimal-point> <digits>;)
 
+(defcc <digit-1-to-9>
+  "1" := ["1"];
+  "2" := ["2"];
+  "3" := ["3"];
+  "4" := ["4"];
+  "5" := ["5"];
+  "6" := ["6"];
+  "7" := ["7"];
+  "8" := ["8"];
+  "9" := ["9"];)
+
+(defcc <digit>
+  "0" := ["0"];
+  <digit-1-to-9> := <digit-1-to-9>;)
+
 (defcc <int>
   <digit>;
-  <digit-1-to-9> <digits>;
+  <digit-1-to-9> <digits> := (cn <digit-1-to-9> <digits>);
   <minus> <digit>;
   <minus> <digit-1-to-9> <digits>;)
 
 (defcc <digits>
   <digit>;
-  <digit> <digits>;)
+  <digit> <digits> := (cn <digit> <digits>);)
 
 (defcc <exponent>
   <exp> <digits>;)
