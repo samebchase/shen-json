@@ -25,13 +25,13 @@
   "c#34;" := "c#34;";)
 
 (defcc <minus>
-  "-" := skip;)
+  "-" := "-";)
 
 (defcc <plus>
-  "+" := skip;)
+  "+" := "+";)
 
 (defcc <decimal-point>
-  "." := skip;)
+  "." := ".";)
 
 (defcc <backslash>
   "\" := "\";)
@@ -61,20 +61,20 @@
   <digit> <digits> := (cn <digit> <digits>);
   <e> := "";)
 
-(defcc <number>
-  <int>;
-  <int> <fraction>;
-  <int> <exponent>;
-  <int> <fraction> <exponent>;)
-
 (defcc <fraction>
-  <decimal-point> <digits>;)
+  <decimal-point> <digits> := (cn <decimal-point> <digits>);)
 
 (defcc <int>
   <digit>;
   <digit-1-to-9> <digits> := (cn <digit-1-to-9> <digits>);
   <minus> <digit>;
   <minus> <digit-1-to-9> <digits>;)
+
+(defcc <number>
+  <int>;
+  <int> <fraction>;
+  <int> <exponent>;
+  <int> <fraction> <exponent>;)
 
 (defcc <exponent>
   <exp> <digits>;)

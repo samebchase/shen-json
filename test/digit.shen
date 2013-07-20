@@ -39,3 +39,8 @@
 (compile <digits> ["1" "3"])
 (compile <digits> (explode "12344556"))
 \* </digits> *\
+
+
+\* <fraction> *\
+(compile <fraction> (explode ".1234"))
+\* </fraction> *\
