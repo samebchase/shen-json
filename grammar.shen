@@ -54,17 +54,15 @@
   Digit-1-to-9 := Digit-1-to-9 where (member Digit-1-to-9 (explode "123456789"));)
 
 (defcc <digit>
-  "0" := "0";
-  <digit-1-to-9> := <digit-1-to-9>;)
+  Digit := Digit where (member Digit (explode "0123456789"));)
+
+(defcc <digits-star>
+  <digit> <digits-star> := (@s <digit> <digits-star>);
+  <e> := "";)
 
 (defcc <digits>
-  <digits> <digits> := (@s <digit> <digits>);
-  <e> := "";)
-
-(defcc <json-digits>
   "0" := "0";
-  <digit-1-to-9> <digits> := (@s <digit-1-to-9> <digits>);
-  <e> := "";)
+  <digit-1-to-9> <digits-star> := (@s <digit-1-to-9> <digits-star>);)
 
 (defcc <fraction>
   <decimal-point> <digits> := (@s <decimal-point> <digits>);)
@@ -72,12 +70,13 @@
 (defcc <int>
   <digit> := <digit>;
   <minus> <digit> := (@s <minus> <digit>);
-  <digit-1-to-9> <digits> := (@s <digit-1-to-9> <digits>);
-  <minus> <digit-1-to-9> <digits> := (@s <minus> <digit-1-to-9> <digits>);
-  <e> := "";)
+  <digits> := <digits>;
+  <minus> <digits> := (@s <minus> <digits>);)
 
 (defcc <int-test>
-  <minus> <digits> := (@s <minus> <digits>);
+  "0" := "0";
+  <minus> <digit-1-to-9> := (@s <minus> <digit-1-to-9>);
+  <minus> <digit-1-to-9> <digits> := (@s <minus> <digit-1-to-9> <digits>);
   <digit-1-to-9> <digits> := (@s <digit-1-to-9> <digits>);)
 
 (defcc <number>

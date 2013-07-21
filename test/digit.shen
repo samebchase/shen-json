@@ -1,16 +1,3 @@
-\* <digit-1-to-9> *\
-(compile <digit-1-to-9> ["1"])
-(compile <digit-1-to-9> ["2"])
-(compile <digit-1-to-9> ["3"])
-(compile <digit-1-to-9> ["4"])
-(compile <digit-1-to-9> ["5"])
-(compile <digit-1-to-9> ["6"])
-(compile <digit-1-to-9> ["7"])
-(compile <digit-1-to-9> ["8"])
-(compile <digit-1-to-9> ["9"])
-\* </digit-1-to-9>*\
-
-
 \* <digit> *\
 (compile <digit> ["0"])
 (compile <digit> ["1"])
@@ -36,11 +23,10 @@
 (compile <digits> ["8"])
 (compile <digits> ["9"])
 
-(compile <digits> ["1" "3"])
+(compile <digits> (explode "3"))
 (compile <digits> (explode "12344556"))
+(compile <digits> (explode "0123"))
 \* </digits> *\
-
-
 
 
 \* <fraction> *\
