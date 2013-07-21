@@ -1,25 +1,25 @@
 (load "util.shen")
 
 (defcc <left-square-bracket>
-  "[" := [array-begin "["];)
+  "[" := "[";)
 
 (defcc <right-square-bracket>
-  "]" := [array-end "]"];)
+  "]" := "]";)
 
 (defcc <comma>
-  "," := [comma ","];)
+  "," := ",";)
 
 (defcc <true>
-  "t" "r" "u" "e" := [bool "true"];)
+  "t" "r" "u" "e" := "true";)
 
 (defcc <false>
-  "f" "a" "l" "s" "e" := [bool "false"];)
+  "f" "a" "l" "s" "e" := "false";)
 
 (defcc <null>
-  "n" "u" "l" "l" := [null "null"];)
+  "n" "u" "l" "l" := "null";)
 
 (defcc <colon>
-  ":" := [colon ":"])
+  ":" := ":";)
 
 (defcc <double-quote>
   "c#34;" := "c#34;";)
@@ -48,7 +48,7 @@
   <e> := "";)
 
 (defcc <string>
-  <double-quote> <string-chars> <double-quote> := [string <string-chars>];)
+  <double-quote> <string-chars> <double-quote> := (@s <double-quote> <string-chars> <double-quote>);)
 
 (defcc <digit-1-to-9>
   Digit-1-to-9 := Digit-1-to-9 where (member Digit-1-to-9 (explode "123456789"));)
@@ -91,31 +91,30 @@
   <int> <fraction> := (@s <int> <fraction>);
   <int> := <int>;)
 
-(defcc <pair>
-  <string> <colon> <value>
-  := [pair [<string> <colon> <value>]];)
-
-(defcc <value>
-  <true>;
-  <false>;
-  <null>;
-  <string>;
-  <number>;
-  <object>;
-  <array>;)
-
-(defcc <object> 
- <left-curly-brace> <right-curly-brace>;
- <left-curly-brace> <members> <right-curly-brace>;)
-
-(defcc <members>
-  <pair>;
-  <pair> <comma> <members>;)
+(defcc <elements>
+  <value> <comma> <elements> := (@s <value> <comma> <elements>);
+  <value> := <value>;)
 
 (defcc <array>
- <left-square-bracket> <right-square-bracket>;
- <left-square-bracket> <elements> <right-square-bracket>;)
+  "[" "]"            := (@s "[" "]");
+  "[" <elements> "]" := (@s "[" <elements> "]");)
 
-(defcc <elements>
-  <value>;
-  <value> <comma> <elements>;)
+(defcc <object>
+  "{" "}"            := (@s "{" "}");
+  "{" <members> "}"  := (@s "{" <members> "}");)
+
+(defcc <pair>
+  <string> <colon> <value> := (@s <string> <colon> <value>);)
+
+(defcc <members>
+  <pair> <comma> <members> := (@s <pair> <comma> <members>);
+  <pair> := <pair>;)
+
+(defcc <value>
+  <string> := <string>;
+  <number> := <number>;
+  <array> := <array>;
+  <object> := <object>;
+  <true> := <true>;
+  <false> := <false>;
+  <null> := <null>;)

@@ -8,5 +8,6 @@
 \* <pair> -> <string> : <null> *\
 (compile <pair> (explode "c#34;onec#34;:null"))
 \* <pair> -> <string> : <array> *\
+(compile <pair> (explode "c#34;onec#34;:[1,2,3,4,5,6]"))
 \* <pair> -> <string> : <object> *\
 \* </pair> *\
