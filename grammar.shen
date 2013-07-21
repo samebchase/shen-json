@@ -1,11 +1,5 @@
 (load "util.shen")
 
-(defcc <left-square-bracket>
-  "[" := "[";)
-
-(defcc <right-square-bracket>
-  "]" := "]";)
-
 (defcc <comma>
   "," := ",";)
 
@@ -39,26 +33,31 @@
 (defcc <any-char>
   Char := Char;)
 
+\* TODO: properly parse 4 digit hex unicode. *\
+
 (defcc <string-char>
-  Char := Char where (not (= Char "c#34;"));)
+  Char := Char where (not (member Char ["c#34;" "\" "/" "b" "f" "n" "r" "t"]));)
 
 (defcc <string-chars>
   "\" <any-char> <string-chars> := (@s <any-char> <string-chars>);
-  <string-char> <string-chars> := (@s <string-char> <string-chars>);
-  <e> := "";)
+  <string-char> <string-chars>  := (@s <string-char> <string-chars>);
+  <e>                           := "";)
 
 (defcc <string>
-  <double-quote> <string-chars> <double-quote> := (@s <double-quote> <string-chars> <double-quote>);)
+  <double-quote> <string-chars> <double-quote> :=
+  (@s <double-quote> <string-chars> <double-quote>);)
 
 (defcc <digit-1-to-9>
-  Digit-1-to-9 := Digit-1-to-9 where (member Digit-1-to-9 (explode "123456789"));)
+  Digit-1-to-9 := Digit-1-to-9 where
+  (member Digit-1-to-9 (explode "123456789"));)
 
 (defcc <digit>
-  Digit := Digit where (member Digit (explode "0123456789"));)
+  Digit := Digit where
+  (member Digit (explode "0123456789"));)
 
 (defcc <digits-star>
   <digit> <digits-star> := (@s <digit> <digits-star>);
-  <e> := "";)
+  <e>                   := "";)
 
 (defcc <digits>
   <digit-1-to-9> <digits-star> := (@s <digit-1-to-9> <digits-star>);
@@ -71,7 +70,7 @@
   <decimal-point> <digits-with-leading-zeros> := (@s <decimal-point> <digits-with-leading-zeros>);)
 
 (defcc <int>
-  <digits> := <digits>;
+  <digits>         := <digits>;
   <minus> <digits> := (@s <minus> <digits>);)
 
 (defcc <exp>
@@ -87,13 +86,13 @@
 
 (defcc <number>
   <int> <fraction> <exponent> := (@s <int> <fraction> <exponent>);
-  <int> <exponent> := (@s <int> <exponent>);
-  <int> <fraction> := (@s <int> <fraction>);
-  <int> := <int>;)
+  <int> <exponent>            := (@s <int> <exponent>);
+  <int> <fraction>            := (@s <int> <fraction>);
+  <int>                       := <int>;)
 
 (defcc <elements>
   <value> <comma> <elements> := (@s <value> <comma> <elements>);
-  <value> := <value>;)
+  <value>                    := <value>;)
 
 (defcc <array>
   "[" "]"            := (@s "[" "]");
@@ -108,13 +107,13 @@
 
 (defcc <members>
   <pair> <comma> <members> := (@s <pair> <comma> <members>);
-  <pair> := <pair>;)
+  <pair>                   := <pair>;)
 
 (defcc <value>
   <string> := <string>;
   <number> := <number>;
-  <array> := <array>;
+  <array>  := <array>;
   <object> := <object>;
-  <true> := <true>;
-  <false> := <false>;
-  <null> := <null>;)
+  <true>   := <true>;
+  <false>  := <false>;
+  <null>   := <null>;)
