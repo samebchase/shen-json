@@ -68,16 +68,8 @@
   <decimal-point> <digits> := (@s <decimal-point> <digits>);)
 
 (defcc <int>
-  <digit> := <digit>;
-  <minus> <digit> := (@s <minus> <digit>);
   <digits> := <digits>;
   <minus> <digits> := (@s <minus> <digits>);)
-
-(defcc <int-test>
-  "0" := "0";
-  <minus> <digit-1-to-9> := (@s <minus> <digit-1-to-9>);
-  <minus> <digit-1-to-9> <digits> := (@s <minus> <digit-1-to-9> <digits>);
-  <digit-1-to-9> <digits> := (@s <digit-1-to-9> <digits>);)
 
 (defcc <number>
   <int>;
