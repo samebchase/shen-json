@@ -17,7 +17,12 @@
 
 
 \* <exp> *\
-
+(compile <exp> (explode "e"))
+(compile <exp> (explode "e+"))
+(compile <exp> (explode "e-"))
+(compile <exp> (explode "E"))
+(compile <exp> (explode "E+"))
+(compile <exp> (explode "E-"))
 \* <\exp> *\
 
 \* <number> *\
