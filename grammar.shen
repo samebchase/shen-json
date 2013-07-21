@@ -61,8 +61,8 @@
   <e> := "";)
 
 (defcc <digits>
-  "0" := "0";
-  <digit-1-to-9> <digits-star> := (@s <digit-1-to-9> <digits-star>);)
+  <digit-1-to-9> <digits-star> := (@s <digit-1-to-9> <digits-star>);
+  <digit> := <digit>;)
 
 (defcc <digits-with-leading-zeros>
   <digit> <digits-star> := (@s <digit> <digits-star>);)
