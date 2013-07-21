@@ -1,18 +1,24 @@
 \* <int> *\
-(compile <int> ["0"])
-(compile <int> ["1"])
-(compile <int> ["2"])
-(compile <int> ["3"])
-(compile <int> ["4"])
-(compile <int> ["5"])
-(compile <int> ["6"])
-(compile <int> ["7"])
-(compile <int> ["8"])
-(compile <int> ["9"])
-
-(compile <int> (explode "123"))
+(compile <int> (explode "1"))
+(compile <int> (explode "-4"))
+(compile <int> (explode "1234"))
+(compile <int> (explode "-4567"))
+\* these should fail as leading zeros are not allowed. *\
+(compile <int> (explode "-04567"))
+(compile <int> (explode "01234"))
 \* </int> *\
 
+
+\* <fraction> *\
+(compile <fraction> (explode ".1234"))
+(compile <fraction> (explode ".0234"))
+(compile <fraction> (explode ".0"))
+\* </fraction> *\
+
+
+\* <exp> *\
+
+\* <\exp> *\
 
 \* <number> *\
 \* </number> *\
