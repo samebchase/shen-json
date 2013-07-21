@@ -25,5 +25,32 @@
 (compile <exp> (explode "E-"))
 \* <\exp> *\
 
+\* <exponent> *\
+(compile <exponent> (explode "e23"))
+(compile <exponent> (explode "E23"))
+(compile <exponent> (explode "e+23"))
+(compile <exponent> (explode "E+23"))
+
+(compile <exponent> (explode "e-31"))
+(compile <exponent> (explode "E-31"))
+(compile <exponent> (explode "e+31"))
+(compile <exponent> (explode "E+31"))
+\* <exponent> *\
+
 \* <number> *\
+(compile <number> (explode "0"))
+(compile <number> (explode "1234"))
+(compile <number> (explode "-1234"))
+(compile <number> (explode "123.456"))
+(compile <number> (explode "-1234.67435"))
+
+(compile <number> (explode "6.0221415e23"))
+(compile <number> (explode "6.0221415E23"))
+(compile <number> (explode "6.0221415e+23"))
+(compile <number> (explode "6.0221415E+23"))
+
+(compile <number> (explode "-9.10938188e-31"))
+(compile <number> (explode "-9.10938188E-31"))
+(compile <number> (explode "-9.10938188e+31"))
+(compile <number> (explode "-9.10938188E+31"))
 \* </number> *\

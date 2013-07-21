@@ -64,21 +64,15 @@
   "0" := "0";
   <digit-1-to-9> <digits-star> := (@s <digit-1-to-9> <digits-star>);)
 
+(defcc <digits-with-leading-zeros>
+  <digit> <digits-star> := (@s <digit> <digits-star>);)
+
 (defcc <fraction>
-  <decimal-point> <digits> := (@s <decimal-point> <digits>);)
+  <decimal-point> <digits-with-leading-zeros> := (@s <decimal-point> <digits-with-leading-zeros>);)
 
 (defcc <int>
   <digits> := <digits>;
   <minus> <digits> := (@s <minus> <digits>);)
-
-(defcc <number>
-  <int>;
-  <int> <fraction>;
-  <int> <exponent>;
-  <int> <fraction> <exponent>;)
-
-(defcc <exponent>
-  <exp> <digits>;)
 
 (defcc <exp>
   "e" "+" := (@s "e" "+");
@@ -87,6 +81,15 @@
   "E" "-" := (@s "E" "-");
   "E"     := "E";
   "e"     := "e";)
+
+(defcc <exponent>
+  <exp> <digits> := (@s <exp> <digits>);)
+
+(defcc <number>
+  <int> <fraction> <exponent> := (@s <int> <fraction> <exponent>);
+  <int> <exponent> := (@s <int> <exponent>);
+  <int> <fraction> := (@s <int> <fraction>);
+  <int> := <int>;)
 
 (defcc <pair>
   <string> <colon> <value>
