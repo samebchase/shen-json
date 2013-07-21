@@ -80,25 +80,7 @@
 (defcc <exponent>
   <exp> <digits>;)
 
-(defcc <exp-lowercase>
-  "e" := "e";)
-
-(defcc <exp-uppercase>
-  "E" := "E";)
-
-(defcc <exp-symbol>
-  <exp-lowercase> := <exp-lowercase>;
-  <exp-uppercase> := <exp-uppercase>;)
-
-(defcc <exp-compound-form>
-  <exp-symbol> <plus> := (@s <exp-symbol> <plus>);
-  <exp-symbol> <minus> := (@s <exp-symbol> <minus>);)
-
 (defcc <exp>
-  <exp-compound-form> := <exp-compound-form>;
-  <exp-symbol> := <exp-symbol>;)
-
-(defcc <exp-alter>
   "e" "+" := (@s "e" "+");
   "e" "-" := (@s "e" "-");
   "E" "+" := (@s "E" "+");
