@@ -30,16 +30,34 @@
 (defcc <backslash>
   "\" := "\";)
 
-(defcc <any-char>
-  Char := Char;)
+(defcc <hex-char>
+  Char := Char where (member Char (explode "0123456789ABCDEFabcdef")))
 
-\* TODO: properly parse 4 digit hex unicode. *\
+(defcc <hex-char-1>
+  <hex-char> := <hex-char>;)
 
+(defcc <hex-char-2>
+  <hex-char> := <hex-char>;)
+
+(defcc <hex-char-3>
+  <hex-char> := <hex-char>;)
+
+(defcc <hex-char-4>
+  <hex-char> := <hex-char>;)
+
+(defcc <unicode-char>
+  <hex-char-1> <hex-char-2> <hex-char-3> <hex-char-4> :=
+  (@s <hex-char-1> <hex-char-2> <hex-char-3> <hex-char-4>);)
+ 
 (defcc <string-char>
-  Char := Char where (not (member Char ["c#34;" "\" "/" "b" "f" "n" "r" "t"]));)
+  Char := Char where (not (member Char ["c#34;" "\"]));)
+
+(defcc <allowed-escaped-char>
+  Char           := Char where (member Char ["c#34;" "\" "/" "b" "f" "n" "r" "t" "u"]);
+  <unicode-char> := <unicode-char>;)
 
 (defcc <string-chars>
-  "\" <any-char> <string-chars> := (@s <any-char> <string-chars>);
+  "\" <allowed-escaped-char> <string-chars> := (@s "\" <allowed-escaped-char> <string-chars>);
   <string-char> <string-chars>  := (@s <string-char> <string-chars>);
   <e>                           := "";)
 
