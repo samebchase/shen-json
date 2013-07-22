@@ -109,22 +109,32 @@
   <int>                       := <int>;)
 
 (defcc <elements>
-  <value> <comma> <elements> := (@s <value> <comma> <elements>);
-  <value>                    := <value>;)
+  <optional-spaces> <value> <optional-spaces> <comma> <optional-spaces> <elements> := (@s <value> <comma> <elements>);
+  <optional-spaces> <value> <optional-spaces>                   := <value>;)
+
+(defcc <whitespace-char>
+  " " := " ";)
+
+(defcc <space>
+  <whitespace-char> := <whitespace-char>;)
+
+(defcc <optional-spaces>
+  <space> <optional-spaces> := (@s <space> <optional-spaces>);
+  <e> := "";)
 
 (defcc <array>
-  "[" "]"            := (@s "[" "]");
+  "[" <optional-spaces> "]"            := (@s "[" "]");
   "[" <elements> "]" := (@s "[" <elements> "]");)
 
 (defcc <object>
-  "{" "}"            := (@s "{" "}");
+  "{" <optional-spaces> "}"            := (@s "{" "}");
   "{" <members> "}"  := (@s "{" <members> "}");)
 
 (defcc <pair>
-  <string> <colon> <value> := (@s <string> <colon> <value>);)
+  <string> <optional-spaces> <colon> <optional-spaces> <value> := (@s <string> <colon> <value>);)
 
 (defcc <members>
-  <pair> <comma> <members> := (@s <pair> <comma> <members>);
+  <pair> <optional-spaces> <comma> <optional-spaces> <members> := (@s <pair> <comma> <members>);
   <pair>                   := <pair>;)
 
 (defcc <value>
