@@ -11,14 +11,14 @@ JSON Lexer
 
 *\
 
-(define whitespace?
+(define whitespacep
   \* e.g. ASCII 32 == #\Space. *\
   \* All the others are whitespace characters from an ASCII table. *\
   Char -> (member Char ["c#9;" "c#10;" "c#11;" "c#12;" "c#13;" "c#32;"]))
 
 (define replace-whitespace
   "" -> ""
-  (@s Whitespace Suffix) -> (@s "" (replace-whitespace Suffix)) where (whitespace? Whitespace)
+  (@s Whitespace Suffix) -> (@s "" (replace-whitespace Suffix)) where (whitespacep Whitespace)
   (@s Prefix Suffix) -> (@s Prefix (replace-whitespace Suffix)))
 
 (define fetch-until-unescaped-doublequote
