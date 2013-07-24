@@ -138,11 +138,8 @@
   <vertical-tab>    := <vertical-tab>;
   <carriage-return> := <carriage-return>;)
 
-(defcc <space>
-  <whitespace-char> := <whitespace-char>;)
-
-(defcc <optional-spaces>
-  <space> <optional-spaces> := (@s <space> <optional-spaces>);
+(defcc <whitespace>
+  <whitespace-char> <whitespace> := (@s <whitespace-char> <whitespace>);
   <e> := "";)
 
 (defcc <array>
