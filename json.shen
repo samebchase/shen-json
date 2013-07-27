@@ -29,6 +29,10 @@ JSON Lexer
 (defcc <not-json-string-2>
   <chars-not-in-string> := <chars-not-in-string>;)
 
+(defcc <lexer-element>
+  <string> := <string>;
+  <not-json-string-1> := (consume-whitespace <not-json-string-1>);)
+
 (defcc <lex-json-string>
   <not-json-string-1> <string> <not-json-string-2> :=
   (@s (consume-whitespace <not-json-string-1>)
