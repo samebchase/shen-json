@@ -112,31 +112,8 @@
   <value> <comma> <elements> := (@s <value> <comma> <elements>);
   <value>                    := <value>;)
 
-(defcc <space>
-  " " := " ";)
-
-(defcc <tab>
-  "c#9;" := "c#9;";)
-
-(defcc <newline>
-  "c#10;" := "c#10;";)
-
-(defcc <vertical-tab>
-  "c#11;" := "c#11;";)
-
-(defcc <form-feed>
-  "c#12;" := "c#12;";)
-
-(defcc <carriage-return>
-  "c#13;" := "c#13;";)
-
 (defcc <whitespace-char>
-  <tab>             := <tab>;
-  <space>           := <space>;
-  <newline>         := <newline>;
-  <form-feed>       := <form-feed>;
-  <vertical-tab>    := <vertical-tab>;
-  <carriage-return> := <carriage-return>;)
+  WhitespaceChar := WhitespaceChar where (whitespacep WhitespaceChar);)
 
 (defcc <whitespace>
   <whitespace-char> <whitespace> := (@s <whitespace-char> <whitespace>);
