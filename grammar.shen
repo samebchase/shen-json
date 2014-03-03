@@ -31,6 +31,7 @@
   "\" := "\";)
 
 (defcc <hex-char>
+\* TODO: could use a hash table instead of a list *\
   Char := Char where (member Char (explode "0123456789ABCDEFabcdef")))
 
 (defcc <hex-char-1>
@@ -46,20 +47,20 @@
   <hex-char> := <hex-char>;)
 
 (defcc <unicode-char>
-  <hex-char-1> <hex-char-2> <hex-char-3> <hex-char-4> :=
-  (@s <hex-char-1> <hex-char-2> <hex-char-3> <hex-char-4>);)
+  "\" "u" <hex-char-1> <hex-char-2> <hex-char-3> <hex-char-4> :=
+  (@s "\" "u" <hex-char-1> <hex-char-2> <hex-char-3> <hex-char-4>);)
  
 (defcc <string-char>
   Char := Char where (not (member Char ["c#34;" "\"]));)
 
 (defcc <allowed-escaped-char>
-  Char           := Char where (member Char ["c#34;" "\" "/" "b" "f" "n" "r" "t" "u"]);
-  <unicode-char> := <unicode-char>;)
+  Char           := Char where (member Char ["c#34;" "\" "/" "b" "f" "n" "r" "t"]);)
 
 (defcc <string-chars>
   "\" <allowed-escaped-char> <string-chars> := (@s "\" <allowed-escaped-char> <string-chars>);
-  <string-char> <string-chars>  := (@s <string-char> <string-chars>);
-  <e>                           := "";)
+  <unicode-char>                            := (@s <unicode-char>);
+  <string-char> <string-chars>              := (@s <string-char> <string-chars>);
+  <e>                                       := "";)
 
 (defcc <string>
   <double-quote> <string-chars> <double-quote> :=
