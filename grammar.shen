@@ -54,7 +54,7 @@
   Char := Char where (not (member Char ["c#34;" "\"]));)
 
 (defcc <allowed-escaped-char>
-  Char           := Char where (member Char ["c#34;" "\" "/" "b" "f" "n" "r" "t"]);)
+  Char := Char where (member Char ["c#34;" "\" "/" "b" "f" "n" "r" "t"]);)
 
 (defcc <string-chars>
   "\" <allowed-escaped-char> <string-chars> := (@s "\" <allowed-escaped-char> <string-chars>);

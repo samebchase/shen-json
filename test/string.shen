@@ -48,4 +48,6 @@
 \* String with containing multiple escaped quotes and other text:
 \* ""\"one.two.\"three"" *\
 (compile <string> (explode "c#34;\c#34;one.two.\c#34;threec#34;"))
+
+(compile <string> (explode "c#34;This w h i t e s p a c e should be preserved.c#34;"))
 \* </string> *\

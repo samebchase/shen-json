@@ -25,5 +25,6 @@
 
 (compile <digits> (explode "3"))
 (compile <digits> (explode "12344556"))
+\*
 (compile <digits> (explode "0123"))
-\* </digits> *\
+</digits> *\
