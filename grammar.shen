@@ -32,7 +32,7 @@
 
 (defcc <hex-char>
 \* TODO: could use a hash table instead of a list *\
-  Char := Char where (member Char (explode "0123456789ABCDEFabcdef")))
+  Char := Char where (element? Char (explode "0123456789ABCDEFabcdef")))
 
 (defcc <hex-char-1>
   <hex-char> := <hex-char>;)
@@ -51,10 +51,10 @@
   (@s "\" "u" <hex-char-1> <hex-char-2> <hex-char-3> <hex-char-4>);)
  
 (defcc <string-char>
-  Char := Char where (not (member Char ["c#34;" "\"]));)
+  Char := Char where (not (element? Char ["c#34;" "\"]));)
 
 (defcc <allowed-escaped-char>
-  Char := Char where (member Char ["c#34;" "\" "/" "b" "f" "n" "r" "t"]);)
+  Char := Char where (element? Char ["c#34;" "\" "/" "b" "f" "n" "r" "t"]);)
 
 (defcc <string-chars>
   "\" <allowed-escaped-char> <string-chars> := (@s "\" <allowed-escaped-char> <string-chars>);
@@ -68,11 +68,11 @@
 
 (defcc <digit-1-to-9>
   Digit-1-to-9 := Digit-1-to-9 where
-  (member Digit-1-to-9 (explode "123456789"));)
+  (element? Digit-1-to-9 (explode "123456789"));)
 
 (defcc <digit>
   Digit := Digit where
-  (member Digit (explode "0123456789"));)
+  (element? Digit (explode "0123456789"));)
 
 (defcc <digits-star>
   <digit> <digits-star> := (@s <digit> <digits-star>);
